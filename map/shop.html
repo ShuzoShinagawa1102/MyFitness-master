@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../style/shop_detail.css" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <title>店舗詳細</title>
+
+    <script>
+        
+        // URLパラメータを取得する関数
+        function getParams() {
+            const searchParams = new URLSearchParams(window.location.search);
+            const params = {};
+            for (const [key, value] of searchParams.entries()) {
+                params[key] = value;
+            }
+            return params;
+        }
+
+        // ページが読み込まれたときの処理
+        window.onload = function () {
+            const params = getParams();
+            // パラメータからデータを取得して表示
+            const id = params.id;
+            const name = params.name;
+            const lat = parseFloat(params.lat);
+            const lng = parseFloat(params.lng);
+            const address = params.address;
+            const phone = params.phone;
+            const image = params.image;
+
+            // shop.html内の要素にデータをセット
+            const shopNameElement = document.getElementById("shopName");
+            const shopNameTitleElement = document.getElementById("shopnameTitle");
+            const addressElement = document.getElementById("address");
+            const phoneElement = document.getElementById("phone");
+            const imageElement = document.getElementById("post-top-image");
+          
+            shopNameTitleElement.textContent = `${name}`;
+            shopNameElement.textContent = `【店舗名】：${name}`;
+            addressElement.textContent = `【住所】：${address}`;
+            phoneElement.textContent = `【電話】：${phone}`;
+            imageElement.src = `../image/${params.id}.jpeg`;
+
+            // realtime dbから店舗の在庫状況を取得して表示
+            // realtime dbから店舗の在庫状況を取得して表示
+            const dbRef = ref(db, "stores/" + id);
+                onValue(dbRef, (snapshot) => {
+                    const stockData = snapshot.val();
+                    const table = document.querySelector(".table");
+                    const rows = table.getElementsByTagName("tr");
+                    // 在庫データの項目と対応するテーブル行を特定し、在庫状況を表示
+                    for (let i = 1; i < rows.length; i++) {
+                        const category = rows[i].getElementsByTagName("td")[0].innerText;
+                        const stockKey = `${category.toLowerCase()}_stock`; // カテゴリー名に対応する在庫のキーを作成
+                        const stock = stockData[stockKey] === "yes" ? "◯" : "×"; // 在庫データを判定して◯または×をセット
+                        rows[i].getElementsByTagName("td")[1].innerText = stock;
+                    }
+
+                // distribution_availablityの値をコンソール上に表示
+                const distributionAvailability = stockData["distribution_availablity"];
+                console.log("Distribution Availability:", distributionAvailability);
+            });
+        };
+
+    </script>
+
+</head>
+
+
+<body>
+<div id="body-wrapper">
+
+    <header class="header-wrapper">
+            <nav class="nav-container container">
+                <ul class="nav-list">
+                    <li class="nav-item nav-home"><a href="index.html" >Home</a></li>
+                </ul>
+            </nav>
+    </header>
+
+    <section >
+
+        <div class="title-bar"></div>
+        <div class="title-banner">
+            <h1 class="title-banner-text">
+                <div id="shopnameTitle"></div>
+            </h1>
+        </div>
+
+        <div class="container">        
+            <div class="contents">
+                <img id="post-top-image" class="post-top-image" />
+                <h3 class="post">店舗情報</h3>
+                <div id="shopName"></div>
+                <div id="address"></div>
+                <div id="phone"></div>
+                
+                <h3 class="post">緊急在庫状況</h3>
+                <h3>非常食・保存食の在庫状況をお伝えします。</h3>
+                <p>※詳しい状況は店舗へお問い合わせください。</p>
+                <table class="table">
+                    <tr><th>カテゴリー</th><th>状況（在庫あり：◯、品切れ：×）</th></tr>
+                    <tr><td>無償配給食</td><td>◯</td></tr>
+                    <tr><td>緊急食（カンパン等）</td><td>◯</td></tr>
+                    <tr><td>水</td><td>◯</td></tr>
+                    <tr><td>パン類</td><td>◯</td></tr>
+                    <tr><td>ドライフード（パスタ、乾麺、米等）</td><td>◯</td></tr>
+                    <tr><td>日用品</td><td>×</td></tr>
+                    <tr><td>スナック菓子</td><td>×</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-block container">
+            <p>(Copyright) Shuzo Shinagawa & Yusaku Nakatani (2023)</p>
+            <div class="fa-icon-block">
+                <a href="https://github.com/ShuzoShinagawa1102?tab=repositories"  class="fa-icon"><i class="fab fa-github-square fa-2x"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+</div>    
+
+
+
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBXyvizWEhXxMtVxJlo7be8d6E4FXDOILM",
+      authDomain: "food-monk.firebaseapp.com",
+      projectId: "food-monk",
+      storageBucket: "food-monk.appspot.com",
+      messagingSenderId: "54330951818",
+      appId: "1:54330951818:web:6ff0e0dc9136091b7bc573",
+      measurementId: "G-Q9PXERHTFZ"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+    const dbRef = ref(db, "chat_id")
+
+
+  </script>
+
+</body>
+
+</html>

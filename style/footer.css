@@ -1,0 +1,26 @@
+/* Footer */
+.footer-wrapper {
+  margin-top: auto;
+  background-color: #444;
+}
+
+.footer-block {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.fa-icon-block {
+  display: flex;
+}
+
+.fa-icon {
+  margin: 12px 10px;
+  padding: 0;
+  color: #fff;
+}
+
+.footer-text {
+  margin: 16px 0;
+  color: #fff;
+}

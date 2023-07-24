@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food monk</title>
+  </head>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <body>
+
+    <header class="header-wrapper">
+      <nav class="nav-container container">
+          <ul class="nav-list">
+              <li class="nav-item nav-home"><a href="../index.html" >Home</a></li>
+          </ul>
+      </nav>
+    </header>
+
+    <section class="mapContainer container">
+
+      <div class="section-title">
+        <p>食で導き、あなたを救う。</p>
+        <h2>Food monk</h2>
+      </div>
+
+      <div class="mapComponent">
+        <div id="map_canvas"></div>
+      </div>
+      
+      <ul id="mapList" class="scrollable-list">
+      </ul>
+
+    </section>
+    
+  <footer class="footer-wrapper">
+    <div class="footer-block container">
+        <p class="footer-text">(Copyright) Shuzo Shinagawa & Yusaku Nakatani (2023)</p>
+        <div class="fa-icon-block">
+            <a href="https://github.com/ShuzoShinagawa1102?tab=repositories"  class="fa-icon"><i class="fab fa-github-square fa-2x"></i></a>
+        </div>
+    </div>
+  </footer>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDiCLXghb5ALx0FvTuHTw40dO2hn5f3_8&language=ja"></script>
+    <script src="main.js"></script>
+    
+  </body>
+</html>
+

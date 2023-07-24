@@ -1,0 +1,41 @@
+/* Header */
+.header-wrapper {
+  border-bottom: 1px solid #e5e5e5;
+  height: 70px;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  background-color: #e5e5e5;
+}
+
+.nav-container {
+  padding: 0.5rem 0.5rem 0.5rem;
+}
+
+.nav-list {
+  display: flex;
+  padding: 0.5rem;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+.nav-item {
+  color: #444;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 3px;
+}
+
+.nav-home {
+  margin-right: auto;
+}
+
+.nav-item:hover {
+  background: #444;
+  opacity: 0.7;
+}
+
+.nav-item:hover a {
+  color: #fff;
+}

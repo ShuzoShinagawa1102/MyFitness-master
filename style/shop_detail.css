@@ -1,0 +1,180 @@
+@import url("./base.css");
+@import url("./header.css");
+
+/* Common */
+body,
+#body-wrapper {
+  background-color: #fff;
+}
+
+/* main  */
+.main {
+  padding-top: -70px;
+  border-top: solid 1px #fff;
+}
+
+/* image */
+figcaption {
+  margin: 0 20px;
+  text-align: right;
+}
+
+.fig-left {
+  text-align: left;
+}
+
+/* posts */
+.title-bar {
+  background: #444;
+  color: #ffffff;
+  padding-top: 70px;
+  padding-bottom: 10px;
+  border-bottom: 6px #ddd solid;
+}
+
+.title-banner {
+  margin-top: 10px;
+  padding: 1rem;
+  color: #fff;
+  background: #444;
+  font-weight: 500;
+  border: solid 1.5px #777;
+  border-radius: 2px;
+}
+
+.title-banner-text {
+  font-size: 2rem;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.cat-area {
+  margin: 15px 5px 20px auto;
+  max-width: 220px;
+}
+
+.cat-link {
+  font-size: 0.8rem;
+  background-color: #777;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.post-top-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+h2.post {
+  padding: 0.6rem 1.2rem 1rem;
+  color: #494949;
+  background: rgba(230, 255, 230, 0.8);
+  background: #f4f4f4;
+  border-left: solid 5px #777;
+  border-bottom: solid 1px #777;
+  border-bottom: solid 1px #ccc;
+  font-weight: 600;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  font-size: 2.5rem;
+}
+
+h3.post {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-size: 2.25rem;
+}
+
+h3.post:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 7px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #777,
+    #777 2px,
+    #fff 2px,
+    #fff 4px
+  );
+}
+
+h4.post {
+  text-decoration-line: underline;
+  margin: 40px 0 5px;
+}
+
+p.post {
+  padding: 0 15px;
+  margin-bottom: 15px;
+}
+
+/* table */
+.table {
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.table th,
+table td {
+  border: 1px solid #444;
+}
+
+th,
+td {
+  padding: 7px;
+}
+
+/* Author */
+.author-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 80px 20px;
+  padding: 10px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+.profile-img {
+  margin: 10px 10px;
+  padding: 10px 10px;
+  border: 1px solid #777;
+  border-radius: 50% 50%;
+  height:184px;
+  width:142px;
+}
+
+.author-info {
+  margin: 10px 10px;
+  padding: 10px 10px;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  color: #444;
+  background-color: #e5e5e5;
+}
+
+.footer-block {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.fa-icon-block {
+  display: flex;
+}
+
+.fa-icon {
+  margin: 12px 10px;
+  padding: 0;
+  color: #777;
+}
