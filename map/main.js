@@ -250,8 +250,6 @@ async function initMap() {
     
   myOptions.styles = mapStyles;
   
-
-
   const map = new google.maps.Map(
     document.getElementById("map_canvas"),
     myOptions
@@ -292,7 +290,9 @@ async function initMap() {
           };
         }
         createMarker(name, latlng, icons, map, id, address, phone, image, category);
+        // console.log(item.latitude);
         maplistUl.innerHTML += `<li id="li-${id}"><img src=${image} /><div> <h4>${name}</h4> 住所：${address} </div></li>`;
+        // maplistUl.innerHTML += `<li id="li-${id}"><iframe src="https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDDiCLXghb5ALx0FvTuHTw40dO2hn5f3_8&location=${item.latitude},${item.longitude}"></iframe><div> <h4>${name}</h4> 住所：${address} </div></li>`;
       }
   
       maplistLi = document.querySelectorAll("#mapList li");
@@ -328,8 +328,6 @@ function scrollToMapListElement(id) {
     });
   }
 }
-
-
 
 //　各マーカーのセット
 function createMarker(name, latlng, icons, map, id, address, phone, image, category) { // 追加: categoryを引数に追加
