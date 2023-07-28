@@ -37,7 +37,7 @@
             const lng = parseFloat(params.lng);
             const address = params.address;
             const phone = params.phone;
-            const image = params.image;
+            const imageUrl = params.imageUrl;
 
             // shop.html内の要素にデータをセット
             const shopNameElement = document.getElementById("shopName");
@@ -50,7 +50,7 @@
             shopNameElement.textContent = `【店舗名】：${name}`;
             addressElement.textContent = `【住所】：${address}`;
             phoneElement.textContent = `【電話】：${phone}`;
-            imageElement.src = `../image/${params.id}.jpeg`;
+            imageElement.src = `${imageUrl}`;
   
         var firebaseConfig = {
             apiKey: "AIzaSyBXyvizWEhXxMtVxJlo7be8d6E4FXDOILM",
@@ -144,7 +144,3 @@
 </body>
 
 </html>
-
-
-
-
