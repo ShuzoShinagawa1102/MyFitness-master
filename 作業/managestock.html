@@ -7,7 +7,7 @@
         <!-- Firebase JavaScript SDK -->
         <script type="module" >
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
-        import { getDatabase, ref, update } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js';
+        import { getDatabase, ref, update, get } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js';
             // Your Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyBXyvizWEhXxMtVxJlo7be8d6E4FXDOILM",
@@ -22,12 +22,37 @@
 
         var database = getDatabase();
 
+
+
         // Get storeId from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const storeId = urlParams.get('id');
 
-        </script>
-        <script>
+        // Function to set default select option and update stock status
+        function setStock(stockItem, stockValue) {
+            const selectElement = document.getElementById(stockItem);
+            const stockStatus = stockValue === "yes" ? "在庫あり" : "在庫なし";
+            selectElement.innerHTML = `
+                <option value="yes" ${stockValue === "yes" ? "selected" : ""}>在庫あり</option>
+                <option value="no" ${stockValue === "no" ? "selected" : ""}>在庫なし</option>
+            `;
+        }
+
+        // Get store data from Firebase and set default select options
+        get(ref(database, `stores/${storeId}`)).then((snapshot) => {
+            const data = snapshot.val();
+            // Update stock status dynamically
+            setStock("distributionStock", data.distribution_stock);
+            setStock("emergencyfoodStock", data.emergencyfood_stock);
+            setStock("drinkingwaterStock", data.drinkingwater_stock);
+            setStock("breadStock", data.bread_stock);
+            setStock("driedfoodsStock", data.driedfoods_stock);
+            setStock("dairyalternativesStock", data.dairyalternatives_stock);
+            setStock("snacksandsweetsStock", data.snacksandsweets_stock);
+        }).catch((error) => {
+            console.error("Error getting data:", error);
+        });
+
         // Function to update stock status in Firebase Realtime Database
         function updateStock() {
             console.log("hi");
@@ -59,7 +84,8 @@
             });
 
         }
-
+        window.updateStock = updateStock;
+        
         </script>
         </head>
         <body>
