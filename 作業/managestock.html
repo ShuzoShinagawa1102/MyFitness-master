@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Stock</title>
+        <!-- Firebase JavaScript SDK -->
+        <script type="module" >
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
+        import { getDatabase, ref, update } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js';
+            // Your Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBXyvizWEhXxMtVxJlo7be8d6E4FXDOILM",
+            authDomain: "food-monk.firebaseapp.com",
+            projectId: "food-monk",
+            storageBucket: "food-monk.appspot.com",
+            messagingSenderId: "54330951818",
+            appId: "1:54330951818:web:6ff0e0dc9136091b7bc573",
+            measurementId: "G-Q9PXERHTFZ"
+        };
+        initializeApp(firebaseConfig);
+
+        var database = getDatabase();
+
+        // Get storeId from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const storeId = urlParams.get('id');
+
+        </script>
+        <script>
+        // Function to update stock status in Firebase Realtime Database
+        function updateStock() {
+            console.log("hi");
+            const distributionStock = document.getElementById("distributionStock").value;
+            const emergencyfoodStock = document.getElementById("emergencyfoodStock").value;
+            const drinkingwaterStock = document.getElementById("drinkingwaterStock").value;
+            const breadStock = document.getElementById("breadStock").value;
+            const driedfoodsStock = document.getElementById("driedfoodsStock").value;
+            const dairyalternativesStock = document.getElementById("dairyalternativesStock").value;
+            const snacksandsweetsStock = document.getElementById("snacksandsweetsStock").value;
+
+            // Update stock data in Firebase
+            update(ref(database, `stores/${storeId}`), {
+                distribution_stock: distributionStock,
+                emergencyfood_stock: emergencyfoodStock,
+                drinkingwater_stock: drinkingwaterStock,
+                bread_stock: breadStock,
+                driedfoods_stock: driedfoodsStock,
+                dairyalternatives_stock: dairyalternativesStock,
+                snacksandsweets_stock: snacksandsweetsStock
+            })
+
+            .then(() => {
+                alert("在庫状況が更新されました。");
+            })
+            .catch((error) => {
+                alert("エラーが発生しました。");
+                console.error("Error updating stock:", error);
+            });
+
+        }
+
+        </script>
+        </head>
+        <body>
+            <h1>Manage Stock</h1>
+            <table>
+                <tr>
+                    <th>カテゴリー</th>
+                    <th>状況（在庫あり：◯、品切れ：×）</th>
+                </tr>
+                <tr>
+                    <td>無償配給食</td>
+                    <td>
+                        <select id="distributionStock">
+                            <option value="yes">在庫あり</option>
+                            <option value="no">在庫切れ</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>緊急食</td>
+                    <td>
+                        <select id="emergencyfoodStock">
+                            <option value="yes">在庫あり</option>
+                            <option value="no">在庫切れ</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>水</td>
+                    <td>
+                        <select id="drinkingwaterStock">
+                            <option value="yes">在庫あり</option>
+                            <option value="no">在庫切れ</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>パン類</td>
+                    <td>
+                        <select id="breadStock">
+                            <option value="yes">在庫あり</option>
+                            <option value="no">在庫切れ</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ドライフード（パスタ、乾麺、米等）</td>
+                    <td>
+                        <select id="driedfoodsStock">
+                            <option value="yes">在庫あり</option>
+                            <option value="no">在庫切れ</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>日用品</td>
+                    <td>
+                        <select id="dairyalternativesStock">
+                            <option value="yes">在庫あり</option>
+                            <option value="no">在庫切れ</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>スナック菓子</td>
+                    <td>
+                        <select id="snacksandsweetsStock">
+                            <option value="yes">在庫あり</option>
+                            <option value="no">在庫切れ</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button onclick="updateStock()">送信</button>
+        
+</body>
+</html>
