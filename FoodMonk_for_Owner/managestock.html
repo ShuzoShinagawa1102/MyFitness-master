@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Stock</title>
+
         <!-- Firebase JavaScript SDK -->
         <script type="module" >
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
         import { getDatabase, ref, update, get } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js';
-            // Your Firebase configuration
+
+        // Your Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyBXyvizWEhXxMtVxJlo7be8d6E4FXDOILM",
             authDomain: "food-monk.firebaseapp.com",
@@ -21,8 +23,6 @@
         initializeApp(firebaseConfig);
 
         var database = getDatabase();
-
-
 
         // Get storeId from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
